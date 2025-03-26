@@ -1,0 +1,154 @@
+#+TITLE: початки роботи з ООП у JavaScript
+
+#+begin_src js :results output :exports both
+   console.log("hello world")
+
+  let arr = [1, 2, 3, 10, 20]
+
+  // spread, reduce etc. - ES6 
+  let one;
+  let two;
+  let rest;
+
+  [one, two, ...rest] = [...arr]
+  // console.log(`two: ${two}, rest: ${rest}`)
+
+  function sum(a, b, c){
+  	return a+b+c;
+  }
+
+  // rest: [3, 10, 20]
+  rest = [1, 2, 3, 4, 5, 6, 7]
+  console.log(sum(...rest));
+
+  // OBJECTS in js
+  let obj = {}
+  let objAnotherOne = new Object();
+
+  let student = {
+  	name: "Dmytro" 
+  }
+
+  student.age = 18;
+  student['faculty'] = 'math';
+  console.log(student);
+
+  for(key in student){
+  	console.log(student[key])
+  }
+
+  student.info = {
+  	city: 'Chernivtsy',
+  	hoby: 'stamp collection'
+  }
+
+  student.sayHello = function(greetings){
+  	console.log(greetings);
+  }
+
+  student.sayHelloArrow = (greetings) => {
+  	console.log(greetings)
+  }
+
+  student.sayHello('Nicu');
+  console.log(student.info.hoby);
+
+  let val = {property: 3};
+  let newVal = val;
+  val.property = 5;
+  // console.log(newVal);
+
+  // deep copy
+  let objNew = Object.assign({}, val);
+  let objNewNew = {}
+  // shallow copy
+  for(key in val){ objNewNew[key] = val[key] }
+
+  val.property = 7;
+  console.log(objNew);
+
+  console.log(Object.keys(student));
+
+
+
+
+
+
+
+  student.info = {
+  	city: 'Chernivtsy',
+  	hoby: 'stamp collection'
+  }
+
+  student.sayHello = function(greetings){
+  	console.log(`My name is ${this.name}, ${greetings}`);
+  }
+
+  student.sayHello("hello world");
+
+  student.sayHelloArrow = (greetings) => {
+  	console.log(`My name ${this.name}, ${greetings}`);
+  }
+
+  student.sayHelloArrow('hello world');
+
+
+  class Student {
+  	constructor(name, age, hobby){
+  		this.name = name;
+  		this.age = age;
+  		this.hobby = hobby;
+  	}
+
+  	sayHello(greet){
+  		console.log(`I am ${this.name}, ${greet}`)
+  	}
+  }
+
+  let studentNew = new Student('Ihor', 17, 'music');
+  studentNew.sayHello('greetings!');
+
+  let students = [
+  	new Student('Ihor', 17, new Student()),
+  	new Student('Kyryllo', 18, 'chess'),
+  	new Student('Nicu', 19, 'music')
+  ]
+
+  let studentsFiltered = students.filter((s) => {
+  	return s.hobby == 'music'
+  })
+
+  console.log(studentsFiltered);
+
+  let s = new Student();
+  console.log(s);
+
+  // console.log(students[0].isCitizenOfUs.sayHello)
+
+
+
+
+
+
+
+
+
+#+end_src
+
+#+begin_src sh
+hello world
+6
+{ name: 'Dmytro', age: 18, faculty: 'math' }
+Dmytro
+18
+math
+Nicu
+stamp collection
+{ property: 5 }
+[ 'name', 'age', 'faculty', 'info', 'sayHello', 'sayHelloArrow' ]
+My name is Dmytro, hello world
+My name undefined, hello world
+I am Ihor, greetings!
+[ Student { name: 'Nicu', age: 19, hobby: 'music' } ]
+Student { name: undefined, age: undefined, hobby: undefined }
+#+end_src
